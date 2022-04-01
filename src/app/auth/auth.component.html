@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-xs-12 col-xl-6 col-md-4 form-section">
-      <div *ngIf="error != null" class="alert alert-danger">{{error}}</div>
+      <!--      <div *ngIf="error != null" class="alert alert-danger">{{error}}</div>-->
+      <!-- Dynamic Component with *ngIf -->
+      <!--      <app-dynamic-alert [message]="error" *ngIf="error" (close)="handleOnErrorClose()"></app-dynamic-alert>-->
       <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
         <div class="form-group">
           <label for="email">Email</label>
