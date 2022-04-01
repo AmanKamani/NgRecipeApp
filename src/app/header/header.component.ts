@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {DataService} from "../shared/data.service";
 import {AuthService} from "../auth/auth.service";
 import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-header",
@@ -12,7 +13,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private _userSubscription!: Subscription;
 
-  constructor(private _dataService: DataService, private _authService: AuthService) {
+  constructor(
+    private _dataService: DataService,
+    private _authService: AuthService,
+    private _router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -31,5 +36,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._userSubscription.unsubscribe();
+  }
+
+  onLogout() {
+    this._authService.logout();
   }
 }

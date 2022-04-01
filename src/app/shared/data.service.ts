@@ -27,7 +27,6 @@ export class DataService {
           });
         }),
         tap(response => {
-          console.log(`taping`)
           this._recipeService.setRecipes(response);
         })
       );
