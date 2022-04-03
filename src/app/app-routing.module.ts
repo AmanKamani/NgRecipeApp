@@ -7,10 +7,14 @@ const appRoutes: Routes = [
     path: 'recipes',
     loadChildren: () =>
       import("./feature-recipes/recipes.module")
-        .then(
-          module => module.RecipesModule
-        )
-  }
+        .then(module => module.RecipesModule)
+  },
+  {
+    path: 'shopping-list',
+    loadChildren: () =>
+      import("./feature-shopping-list/shopping-list.module")
+        .then(module => module.ShoppingListModule)
+  },
 ]
 
 @NgModule({
