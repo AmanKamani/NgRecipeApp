@@ -13,11 +13,11 @@ import {ShoppingEditComponent} from "./shopping-edit/shopping-edit.component";
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule.forChild([
+      {path: 'shopping-list', component: ShoppingListComponent}
+    ])
   ],
   exports: [
-    ShoppingListComponent,
-    ShoppingEditComponent,
     RouterModule,
   ]
 })
