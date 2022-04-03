@@ -7,7 +7,6 @@ import {RecipesComponent} from "./recipes.component";
 import {RecipeItemComponent} from "./recipe-list/recipe-item/recipe-item.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {RouterModule} from "@angular/router";
 import {DropdownDirective} from "../shared/dropdown.directive";
 import {RecipesRoutingModule} from "./recipes-routing.module";
 
@@ -23,7 +22,6 @@ import {RecipesRoutingModule} from "./recipes-routing.module";
   ],
   imports: [
     CommonModule,
-    RouterModule,
     ReactiveFormsModule,
     RecipesRoutingModule,
   ],
