@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiKey: "AIzaSyDD8c0_Lek8_OknCjXajaSI7YVGaHeh3LA",
+  authURLPrefix: "https://identitytoolkit.googleapis.com/v1/accounts:",
+  databaseURL: "https://ng-recipes-fd2c2-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json",
 };
 
 /*
