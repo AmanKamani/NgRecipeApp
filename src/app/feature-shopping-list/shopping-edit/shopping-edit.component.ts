@@ -17,7 +17,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('f') shoppingListForm!: NgForm;
 
   isEditModeEnabled = false;
-  editingIndex: number | undefined;
   editingIngredient: Ingredient | null = null;
 
   private storeSubscription!: Subscription;
@@ -42,7 +41,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.storeSubscription = this.store.select("shoppingList").subscribe(stateData => {
       this.isEditModeEnabled = (!!stateData.editingIngredient && stateData.editingIngredientIndex !== -1);
       this.editingIngredient = stateData.editingIngredient;
-      this.editingIndex = stateData.editingIngredientIndex;
       if (this.editingIngredient) {
         this.shoppingListForm.setValue({
           name: this.editingIngredient.name,
@@ -57,7 +55,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const ingredient = new Ingredient(formValue.name, formValue.amount);
     if (this.isEditModeEnabled)
       // this.shoppingService.updateIngredient(this.editingIndex!, ingredient);
-      this.store.dispatch(new SlActions.UpdateIngredientAction({id: this.editingIndex!, newIngredient: ingredient}))
+      this.store.dispatch(new SlActions.UpdateIngredientAction(ingredient))
     else
       // this.shoppingService.addIngredient(ingredient);
       this.store.dispatch(new SlActions.AddIngredientAction(ingredient))
@@ -67,7 +65,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onDelete() {
     if (this.isEditModeEnabled && this.editingIngredient) {
       // this.shoppingService.deleteIngredient(this.editingIndex!);
-      this.store.dispatch(new SlActions.DeleteIngredientAction(this.editingIndex!))
+      this.store.dispatch(new SlActions.DeleteIngredientAction())
     }
     this.onClear();
   }

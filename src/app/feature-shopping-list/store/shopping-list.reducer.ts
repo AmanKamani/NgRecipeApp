@@ -37,18 +37,19 @@ export function shoppingListReducer(
         ingredients: [...state.ingredients, ...(action as SlActions.AddIngredientsAction).payload]
       };
     case SlActions.UPDATE_INGREDIENT:
-      const payload = (action as SlActions.UpdateIngredientAction).payload;
+      const newIngredient = (action as SlActions.UpdateIngredientAction).payload;
       const ings = [...state.ingredients];
-      ings[payload.id] = payload.newIngredient;
+      ings[state.editingIngredientIndex] = newIngredient;
       return {
         ...state,
-        ingredients: ings
+        ingredients: ings,
+        editingIngredientIndex: -1,
+        editingIngredient: null,
       };
     case SlActions.DELETE_INGREDIENT:
-      const index = (action as SlActions.DeleteIngredientAction).payload;
       return {
         ...state,
-        ingredients: state.ingredients.filter((ingredient, igIndex) => igIndex !== index)
+        ingredients: state.ingredients.filter((ingredient, igIndex) => igIndex !== state.editingIngredientIndex)
       };
     case SlActions.START_EDIT:
       const editId = (action as SlActions.StartEditAction).payload;

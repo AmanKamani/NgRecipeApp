@@ -28,15 +28,12 @@ export class AddIngredientsAction implements Action {
 export class UpdateIngredientAction implements Action {
   readonly type = UPDATE_INGREDIENT;
 
-  constructor(public payload: { id: number, newIngredient: Ingredient }) {
+  constructor(public payload: Ingredient) {
   }
 }
 
 export class DeleteIngredientAction implements Action {
   readonly type = DELETE_INGREDIENT;
-
-  constructor(public payload: number) {
-  }
 }
 
 export class StartEditAction implements Action {
