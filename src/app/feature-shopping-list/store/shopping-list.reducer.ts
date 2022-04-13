@@ -2,11 +2,14 @@ import {Ingredient} from "../../shared/ingredient.model";
 import * as SlActions from "./shopping-list.actions";
 import {Action} from "@ngrx/store";
 
-export interface State {
+interface State {
   ingredients: Ingredient[],
   editedIngredientIndex: number
 }
 
+export interface AppState {
+  shoppingList: State
+}
 
 const initialState: State = {
   ingredients: [

@@ -4,7 +4,7 @@ import {ShoppingListService} from "../shopping-list.service";
 import {NgForm} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {AddIngredientAction, DeleteIngredientAction, UpdateIngredientAction} from "../store/shopping-list.actions";
-import {State} from "../store/shopping-list.reducer";
+import * as fromShoppingList from "../store/shopping-list.reducer";
 
 @Component({
   selector: 'app-shopping-edit',
@@ -21,7 +21,7 @@ export class ShoppingEditComponent implements OnInit {
 
   constructor(
     private shoppingService: ShoppingListService,
-    private store: Store<{ shoppingList: State }>
+    private store: Store<fromShoppingList.AppState>
   ) {
   }
 
