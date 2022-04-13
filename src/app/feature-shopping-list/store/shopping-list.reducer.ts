@@ -2,15 +2,22 @@ import {Ingredient} from "../../shared/ingredient.model";
 import * as SlActions from "./shopping-list.actions";
 import {Action} from "@ngrx/store";
 
-const initialState = {
+export interface State {
+  ingredients: Ingredient[],
+  editedIngredientIndex: number
+}
+
+
+const initialState: State = {
   ingredients: [
     new Ingredient("Bread", 2),
     new Ingredient("Butter", 1),
-  ]
+  ],
+  editedIngredientIndex: -1
 };
 
 export function shoppingListReducer(
-  state: { ingredients: Ingredient[] } = initialState,
+  state: State = initialState,
   action: Action | SlActions.ShoppingListActions
 ) {
   switch (action.type) {
