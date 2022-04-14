@@ -3,7 +3,7 @@ import {Ingredient} from "../shared/ingredient.model";
 import {Observable, Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
 import * as fromShoppingList from "./store/shopping-list.reducer";
-import {StartEditAction} from "./store/shopping-list.actions";
+import {startEditIgAction} from "./store/shopping-list.actions";
 
 @Component({
   selector: 'app-shopping-list',
@@ -28,6 +28,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   onEditItem(id: number) {
-    this.store.dispatch(new StartEditAction(id));
+    this.store.dispatch(startEditIgAction({index: id}));
   }
 }

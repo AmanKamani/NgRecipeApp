@@ -3,8 +3,8 @@ import {Injectable} from "@angular/core";
 import {Ingredient} from "../shared/ingredient.model";
 import {Subject} from "rxjs";
 import {Store} from "@ngrx/store";
-import {AddIngredientsAction} from "../feature-shopping-list/store/shopping-list.actions";
 import * as fromShoppingList from "../feature-shopping-list/store/shopping-list.reducer";
+import {addIngredientsAction} from "../feature-shopping-list/store/shopping-list.actions";
 
 @Injectable()
 export class RecipeService {
@@ -48,7 +48,7 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    this.store.dispatch(new AddIngredientsAction(ingredients));
+    this.store.dispatch(addIngredientsAction({ingredients}));
     this.raiseOnRecipeChanged();
   }
 
