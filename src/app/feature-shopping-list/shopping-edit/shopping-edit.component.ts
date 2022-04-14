@@ -8,8 +8,8 @@ import {
   stopEditIgAction,
   updateIngredientAction
 } from "../store/shopping-list.actions";
-import * as fromShoppingList from "../store/shopping-list.reducer";
 import {Subscription} from "rxjs";
+import {AppState} from "../../store/app.reducer";
 
 @Component({
   selector: 'app-shopping-edit',
@@ -26,7 +26,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   private storeSubscription!: Subscription;
 
   constructor(
-    private store: Store<fromShoppingList.AppState>
+    private store: Store<AppState>
   ) {
   }
 

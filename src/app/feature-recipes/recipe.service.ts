@@ -3,8 +3,8 @@ import {Injectable} from "@angular/core";
 import {Ingredient} from "../shared/ingredient.model";
 import {Subject} from "rxjs";
 import {Store} from "@ngrx/store";
-import * as fromShoppingList from "../feature-shopping-list/store/shopping-list.reducer";
 import {addIngredientsAction} from "../feature-shopping-list/store/shopping-list.actions";
+import {AppState} from "../store/app.reducer";
 
 @Injectable()
 export class RecipeService {
@@ -35,7 +35,7 @@ export class RecipeService {
   private recipes: Recipe[] = [];
 
   constructor(
-    private store: Store<fromShoppingList.AppState>
+    private store: Store<AppState>
   ) {
   }
 

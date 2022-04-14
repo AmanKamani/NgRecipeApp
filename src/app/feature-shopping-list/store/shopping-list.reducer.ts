@@ -9,14 +9,10 @@ import {
 } from "./shopping-list.actions";
 import {createReducer, on} from "@ngrx/store";
 
-interface State {
+export interface State {
   ingredients: Ingredient[],
   editingIngredientIndex: number,
   editingIngredient: Ingredient | null
-}
-
-export interface AppState {
-  shoppingList: State
 }
 
 const initialState: State = {
