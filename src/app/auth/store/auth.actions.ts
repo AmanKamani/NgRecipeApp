@@ -1,10 +1,11 @@
 import {createAction, props} from "@ngrx/store";
 
-export const login = createAction("LOGIN", props<{
+const feature = "[Auth]"
+export const login = createAction(`${feature} Login`, props<{
   email: string,
   id: string,
   token: string,
   tokenExpiryDate: Date
 }>());
 
-export const logout = createAction("LOGOUT")
+export const logout = createAction(`${feature} Logout`)
