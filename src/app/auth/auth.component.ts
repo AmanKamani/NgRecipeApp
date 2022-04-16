@@ -1,10 +1,12 @@
 import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {AuthResponseData, AuthService} from "./auth.service";
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {PlaceholderDirective} from "../shared/placeholder/placeholder.directive";
 import {AlertComponent} from "../shared/alert/alert.component";
+import {Store} from "@ngrx/store";
+import {AppState} from "../store/app.reducer";
+import {loginStart, signupStart} from "./store/auth.actions";
 
 @Component({
   selector: 'app-auth',
@@ -20,13 +22,20 @@ export class AuthComponent implements OnInit, OnDestroy {
   errorCloseSubscription: Subscription | undefined;
 
   constructor(
-    private _authService: AuthService,
     private _router: Router,
-    private _componentFactoryResolver: ComponentFactoryResolver
+    private _componentFactoryResolver: ComponentFactoryResolver,
+    private _store: Store<AppState>
   ) {
   }
 
   ngOnInit(): void {
+    this._store.select("auth").subscribe(authState => {
+      this.isLoading = authState.isLoading
+      this.error = authState.authError
+      if (this.error) {
+        this.createAndShowErrorDialog(this.error);
+      }
+    });
   }
 
   onSwitchMode() {
@@ -39,23 +48,12 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const email = form.value.email!
     const password = form.value.password!
-    let observeResponse: Observable<AuthResponseData>;
-    console.log(email + password)
     if (this.isLoginMode) {
-      observeResponse = this._authService.login(email, password)
+      this._store.dispatch(loginStart({email, password}))
     } else {
-      observeResponse = this._authService.signUp(email, password)
+      this._store.dispatch(signupStart({email, password}));
     }
-
-    observeResponse.subscribe(response => {
-      console.log(response);
-      this._router.navigate(["/recipes"])
-      this.resetForm(form);
-    }, errorMessage => {
-      this.error = errorMessage;
-      this.isLoading = false;
-      this.createAndShowErrorDialog(errorMessage);
-    })
+    this.resetForm(form);
   }
 
   private resetForm(form: NgForm) {
